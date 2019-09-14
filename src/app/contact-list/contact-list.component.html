@@ -1,1 +1,43 @@
-<p>contact-list works!</p>
+<div>
+    <div *ngFor="let contact of contacts">
+
+    <mat-card style="margin: 15px 0px 15px 0px">
+        <mat-card-header>
+            <div style="margin: 15px;">
+                <img src="assets/images/user.png" width="48" height="48" style="border-radius: 50%"/>
+            </div>
+
+            <div style="margin: 15px;">
+                <mat-card-title> {{contact}} </mat-card-title>
+                <mat-card-subtitle>Type of contact</mat-card-subtitle>
+            </div>
+
+            <div style="margin: 15px;">
+
+        <mat-icon>edit</mat-icon>
+
+        <mat-icon>delete</mat-icon>
+
+
+            </div>
+
+
+
+             
+
+
+            </mat-card-header>
+
+            <mat-card-content>
+                    <p>
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                    </p>
+                  </mat-card-content>
+    </mat-card>
+
+
+
+
+        
+    </div>
+</div>

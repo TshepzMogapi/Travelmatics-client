@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactListComponent implements OnInit {
 
+  contacts = ['Tshepiso', 'James', 'Burgouyne'];
+
   constructor() { }
 
   ngOnInit() {
