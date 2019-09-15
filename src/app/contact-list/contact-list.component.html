@@ -1,43 +1,56 @@
 <div>
-    <div *ngFor="let contact of contacts">
-
+  <div *ngFor="let contact of contacts">
     <mat-card style="margin: 15px 0px 15px 0px">
-        <mat-card-header>
-            <div style="margin: 15px;">
-                <img src="assets/images/user.png" width="48" height="48" style="border-radius: 50%"/>
-            </div>
+      <mat-card-header style="float:right;">
 
-            <div style="margin: 15px;">
-                <mat-card-title> {{contact}} </mat-card-title>
-                <mat-card-subtitle>Type of contact</mat-card-subtitle>
-            </div>
+        <!-- on mobile ? -->
+        <mat-icon style="margin:10px;">delete</mat-icon>
 
-            <div style="margin: 15px;">
+            <mat-icon style="margin:10px;">edit</mat-icon>
+      
+      </mat-card-header>
 
-        <mat-icon>edit</mat-icon>
+      <mat-card-content>
 
-        <mat-icon>delete</mat-icon>
+            <mat-grid-list cols="3">
+
+                    <mat-grid-tile colspan="1">
+                            <img
+                            src="assets/images/user.png"
+                            style="border-radius: 50%;height:150px;width: 150px;"
+                          />
+                    </mat-grid-tile>
+
+                    <mat-grid-tile colspan="1" >
+                        <div>
+                            <h3>
+                                {{ contact.firstName }}
+                                <span>{{ contact.lastName }}</span>
+                            </h3>
+                            <div>{{contact.type}}</div>
+                            <br>
+
+                            <div>
+                                <mat-icon>email</mat-icon>
+                                {{contact.emailAddress}}
+                            </div>
+
+                            <div>
+
+                            </div>
+                        </div>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile colspan="1">
+                        <!-- not mobile or grid view -->
+                        <mat-icon style="margin:10px;">edit</mat-icon>
+                        <mat-icon style="margin:10px;">delete</mat-icon>
+                    </mat-grid-tile>
+
+                </mat-grid-list>
 
 
-            </div>
-
-
-
-             
-
-
-            </mat-card-header>
-
-            <mat-card-content>
-                    <p>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    </p>
-                  </mat-card-content>
+      </mat-card-content>
     </mat-card>
-
-
-
-
-        
-    </div>
+  </div>
 </div>
