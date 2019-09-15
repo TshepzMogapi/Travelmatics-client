@@ -1,0 +1,61 @@
+<mat-tab-group>
+        <mat-tab [label]="'Contact Details'">
+          <br />
+          <div class="row-fluid">
+            <div class="col-md-6">
+              <mat-form-field>
+                <input
+                  matInput
+                  name="UserName"
+                  [placeholder]="'name 1'"
+                  
+                  required
+                  minlength="2"
+                  maxlength="32"
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <input
+                  matInput
+                  name="Name"
+                  [placeholder]="'Relationship'"
+                  
+                  required
+                  maxlength="32"
+                />
+              </mat-form-field>
+            
+             
+            </div>
+            <div class="col-md-6">
+              <mat-form-field>
+                <input
+                  matInput
+                  name="EmailAddress"
+                  [placeholder]="'EmailAddress' | localize"
+                 
+                  type="email"
+                  required
+                  maxlength="256"
+                  pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <input
+                  matInput
+                  name="Surname"
+                  [placeholder]="'Last Name'"
+                  
+                  required
+                  maxlength="32"
+                />
+              </mat-form-field>
+              
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab [label]="'Preferences'">
+          <br />
+         
+        </mat-tab>
+      </mat-tab-group>

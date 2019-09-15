@@ -1,8 +1,27 @@
-    <div class="user-info">
-    <div class="image">
-        <img src="assets/images/user.png" width="48" height="48" alt="User" />
+    <div>
+
+    <div>
+        <img src="assets/images/user.png" 
+
+        width="48" height="48" style="border-radius:50%;" />
     </div>
-    <div class="info-container">
+
+    {{shownLoginName}}
+
+    <br>
+
+    <button mat-raised-button [routerLink]="['/app/profile']" style="margin: 10px">
+        <mat-icon>settings_applications</mat-icon> &nbsp;&nbsp;Settings
+    </button>
+
+    <button mat-raised-button (click)="logout()" style="margin: 10px">
+        <mat-icon>power_settings_new</mat-icon> &nbsp;&nbsp;Logout
+    </button>
+
+
+    <!-- {{appSession.user.emailAddress}} -->
+
+    <!-- <div class="info-container">
         <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{shownLoginName}}</div>
         <div class="email">{{appSession.user.emailAddress}}</div>
         <div class="btn-group user-helper-dropdown">
@@ -12,5 +31,5 @@
                 <li><a (click)="logout()"><i class="material-icons">input</i>{{ 'Logout' | localize }}</a></li>
             </ul>
         </div>
-    </div>
+    </div> -->
 </div>
