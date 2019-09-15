@@ -1,0 +1,80 @@
+<form autocomplete="off" #createUserModal="ngForm" (ngSubmit)="save()">
+  <h1 mat-dialog-title>{{ "CreateNewUser" | localize }}</h1>
+  <mat-dialog-content style="width:800px;height:300px;">
+    <mat-tab-group>
+      <mat-tab [label]="Contact Details">
+        <br />
+        <div class="row-fluid">
+          <div class="col-md-6">
+            <mat-form-field>
+              <input
+                matInput
+                name="UserName"
+                [placeholder]="name 1"
+                
+                required
+                minlength="2"
+                maxlength="32"
+              />
+            </mat-form-field>
+            <mat-form-field>
+              <input
+                matInput
+                name="Name"
+                [placeholder]="Relationship"
+                
+                required
+                maxlength="32"
+              />
+            </mat-form-field>
+          
+           
+          </div>
+          <div class="col-md-6">
+            <mat-form-field>
+              <input
+                matInput
+                name="EmailAddress"
+                [placeholder]="'EmailAddress' | localize"
+               
+                type="email"
+                required
+                maxlength="256"
+                pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"
+              />
+            </mat-form-field>
+            <mat-form-field>
+              <input
+                matInput
+                name="Surname"
+                [placeholder]="Last Name"
+                
+                required
+                maxlength="32"
+              />
+            </mat-form-field>
+            
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab [label]="Online Presence">
+        <br />
+       
+      </mat-tab>
+    </mat-tab-group>
+  </mat-dialog-content>
+  <div mat-dialog-actions align="end">
+    <button mat-button type="button" >
+      Cancel
+    </button>
+    <button
+      mat-flat-button
+      type="submit"
+      flex="15"
+      color="primary"
+      
+    >
+    Save
+    </button>
+  </div>
+</form>

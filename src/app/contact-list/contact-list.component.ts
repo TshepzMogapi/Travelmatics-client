@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Injector} from '@angular/core';
+
+import { MatDialog } from '@angular/material';
+import { CreateContactComponent } from './contact/create-contact/create-contact.component';
+import { EditContactComponent } from './contact/edit-contact/edit-contact.component';
+
 
 @Component({
   selector: 'app-contact-list',
@@ -7,8 +12,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactListComponent implements OnInit {
 
-  
-
+  isAppMobile = false;
 
   contacts = [ 
     {
@@ -30,9 +34,56 @@ export class ContactListComponent implements OnInit {
       type: 'Friend'
     }];
 
-  constructor() { }
+  constructor( 
+    
+    private _dialog: MatDialog) {
+
+    
+   }
 
   ngOnInit() {
+    this.isAppMobile = this.isDeviceMobile(window);
   }
+
+  addContact() {
+    this.manageContactList();
+  }
+
+  editContact(contactDto: any) {
+
+    this.manageContactList(5);
+
+
+  }
+
+  private manageContactList(id?: number): void {
+
+    let createOrEditContactDialog;
+    if (id === undefined || id <= 0) {
+        createOrEditContactDialog = this._dialog.open(CreateContactComponent);
+    } 
+    
+    else {
+        createOrEditContactDialog = this._dialog.open(EditContactComponent, {
+            data: id
+        });
+    }
+
+    // createOrEditContactDialog.afterClosed().subscribe(result => {
+    //     if (result) {
+    //         this.refresh();
+    //     }
+    // });
+}
+
+isDeviceMobile(window): boolean {
+
+  if (window.outerWidth < 400) {
+      return true;
+  } else {
+      return false;
+  }
+
+}
 
 }
