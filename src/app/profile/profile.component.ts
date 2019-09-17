@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { UserServiceProxy } from '@shared/service-proxies/service-proxies';
+import { AppSessionService } from '@shared/session/app-session.service';
 
 @Component({
   selector: 'app-profile',
@@ -11,24 +13,39 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private _dialog: MatDialog) { }
+    appSession: AppSessionService;
+
+  constructor(private _dialog: MatDialog
+    , private _appSessionService: AppSessionService 
+    ) { }
 
   ngOnInit() {
+
+    this.appSession = this._appSessionService;
+
+
   }
 
   editProfile() {
 
-    this.manageProfile();
+    // this._appSessionService.user
+
+    this.manageProfile(this.appSession.user.id);
     
   }
 
 
-  private manageProfile(id?: number): void {
+  private manageProfile(id: number): void {
 
-    let editProfileDialog;
-    if (id === undefined || id <= 0) {
-      editProfileDialog = this._dialog.open(EditProfileComponent);
-    } 
+    this._dialog.open(EditProfileComponent, {data: id});
+
+  //     let editProfileDialog = this._dialog.open(EditProfileComponent, {data: id});
+
+  //   editProfileDialog.afterClosed().subscribe(result => {
+  //     if (result) {
+  //         this.refresh();
+  //     }
+  // });
     
   
 

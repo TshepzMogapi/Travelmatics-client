@@ -1,11 +1,15 @@
-import { Component, Injector, OnInit } from '@angular/core';
-import { MatDialogRef, MatCheckboxChange } from '@angular/material';
+import { Component, Injector, Optional, Inject, OnInit } from '@angular/core';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+  MatCheckboxChange
+} from '@angular/material';
 import { finalize } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { AppComponentBase } from '@shared/app-component-base';
 import {
   UserServiceProxy,
-  CreateUserDto,
+  UserDto,
   RoleDto
 } from '@shared/service-proxies/service-proxies';
 
@@ -17,16 +21,27 @@ import {
 export class EditProfileComponent implements OnInit {
   saving = false;
 
+  user: UserDto = new UserDto();
+
+
   constructor(
     public _userService: UserServiceProxy,
-    private _dialogRef: MatDialogRef<EditProfileComponent>
+    private _dialogRef: MatDialogRef<EditProfileComponent>,
+    @Optional() @Inject(MAT_DIALOG_DATA) private _id: number
   ) { 
   }
 
   ngOnInit() {
+    this._userService.get(this._id).subscribe(result => {
+      this.user = result;
+    });
   }
 
   save(): void {
+  console.log(this.user);
+
+
+    // this._userService.update()
     // this.saving = true;
 
     
