@@ -1,16 +1,130 @@
 <form autocomplete="off" #createUserModal="ngForm" (ngSubmit)="save()">
-        <h1 mat-dialog-title>Edit contact</h1>
-        <mat-dialog-content>
+        <h1 mat-dialog-title>Edit Profile</h1>
+        <mat-dialog-content style="width: 320px;height: 70vh;">
 
-         
+          <mat-tab-group mat-align-tabs="center" style="width: 200px;">
+            <mat-tab [label]="'Bio'" style="font-size: 10px;">
+
+                <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Names
+      </mat-panel-title>
+      <mat-panel-description>
+        <mat-icon>account_circle</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-form-field>
+      <input matInput
+      placeholder="Name"
+      [(ngModel)]="user.name"
+      name="UserName">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput
+        placeholder="Last Name"
+        [(ngModel)]="user.surname"
+        name="SurName">
+      </mat-form-field>
 
 
 
-          <mat-tab-group mat-align-tabs="center">
-            <mat-tab [label]="'Personal Details'" style="font-size: 10px;">
-              test
+
+    <mat-action-row>
+      <button mat-button color="primary" (click)="nextStep()">Next</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Citizenship
+      </mat-panel-title>
+      <mat-panel-description>
+
+        <mat-icon>map</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-checkbox>SA Citizen</mat-checkbox>
+
+    <mat-form-field>
+      <input matInput placeholder="Country of Birth">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Citizenship">
+    </mat-form-field>
+
+    <mat-action-row>
+      <button mat-button color="primary" (click)="nextStep()">Next</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(1)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Personal data
+        </mat-panel-title>
+        <mat-panel-description>
+
+          <mat-icon>map</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field>
+          <input matInput
+          placeholder="ID Number"
+
+          name="IdNumber">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput
+            placeholder="Passport Number"
+
+            name="PassPortNumber">
+          </mat-form-field>
+
+
+
+
+
+      <mat-action-row>
+        <button mat-button color="warn" (click)="prevStep()">Previous</button>
+        <button mat-button color="primary" (click)="nextStep()">Next</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(1)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Contacts
+          </mat-panel-title>
+          <mat-panel-description>
+
+            <mat-icon>map</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-form-field>
+          <input matInput placeholder="Mobile Number">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Email">
+        </mat-form-field>
+
+        <mat-action-row>
+          <button mat-button color="primary" (click)="nextStep()">Next</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+
+
+
             </mat-tab>
-            <mat-tab [label]="'Preferences'" style="font-size: 10xpx;">
+            <mat-tab [label]="'Preferences'" style="font-size: 10xpx;height: 100vh;">
              <div>
 
                 <mat-accordion>
@@ -19,22 +133,22 @@
                         <mat-panel-title>
                           Personal data
                         </mat-panel-title>
-                                              </mat-expansion-panel-header>
-                  
+                      </mat-expansion-panel-header>
+
                       <mat-form-field>
                         <input matInput placeholder="First name">
                       </mat-form-field>
-                  
+
                       <mat-form-field>
                         <input matInput placeholder="Age">
                       </mat-form-field>
                     </mat-expansion-panel>
-                   
+
                   </mat-accordion>
-                  
+
 
              </div>
-              
+
             </mat-tab>
           </mat-tab-group>
         </mat-dialog-content>
@@ -48,10 +162,9 @@
             type="submit"
             flex="15"
             color="primary"
-            
+
           >
           Save
           </button>
         </div>
 </form>
-      

@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit {
     appSession: AppSessionService;
 
   constructor(private _dialog: MatDialog
-    , private _appSessionService: AppSessionService 
+    , private _appSessionService: AppSessionService
     ) { }
 
   ngOnInit() {
@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
     // this._appSessionService.user
 
     this.manageProfile(this.appSession.user.id);
-    
+
   }
 
 
@@ -46,8 +46,8 @@ export class ProfileComponent implements OnInit {
   //         this.refresh();
   //     }
   // });
-    
-  
+
+
 
 }
 

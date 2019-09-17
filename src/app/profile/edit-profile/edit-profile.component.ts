@@ -23,6 +23,7 @@ export class EditProfileComponent implements OnInit {
 
   user: UserDto = new UserDto();
 
+  step = 0;
 
   constructor(
     public _userService: UserServiceProxy,
@@ -49,5 +50,19 @@ export class EditProfileComponent implements OnInit {
 
   close(result: any): void {
     this._dialogRef.close(result);
+  }
+
+
+
+  setStep(index: number) {
+    this.step = index;
+  }
+
+  nextStep() {
+    this.step++;
+  }
+
+  prevStep() {
+    this.step--;
   }
 }
