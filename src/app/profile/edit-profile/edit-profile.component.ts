@@ -18,39 +18,69 @@ import {
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.css']
 })
-export class EditProfileComponent implements OnInit {
+export class EditProfileComponent extends AppComponentBase implements OnInit {
   saving = false;
 
   user: UserDto = new UserDto();
 
+  roles: RoleDto[] = [];
+  checkedRolesMap: { [key: string]: boolean } = {};
+
+
+
   step = 0;
 
   constructor(
+    injector: Injector,
     public _userService: UserServiceProxy,
     private _dialogRef: MatDialogRef<EditProfileComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) private _id: number
-  ) { 
+  ) {
+    super(injector);
+
   }
 
   ngOnInit() {
     this._userService.get(this._id).subscribe(result => {
       this.user = result;
     });
+
+    // this._userService.getRoles().subscribe(result2 => {
+    //   this.roles = result2.items;
+    //   this.setInitialRolesStatus();
+    // });
   }
 
+  // setInitialRolesStatus(): void {
+  //   _.map(this.roles, item => {
+  //     this.checkedRolesMap[item.normalizedName] = this.isRoleChecked(
+  //       item.normalizedName
+  //     );
+  //   });
+  // }
+
   save(): void {
-  console.log(this.user);
+
+    this.saving = true;
+    this._userService
+      .update(this.user)
+      .pipe(
+        finalize(() => {
+          this.saving = false;
+        })
+      )
+      .subscribe(() => {
+        this.notify.info(this.l('SavedSuccessfully'));
+        this.close(true);
+      });
 
 
-    // this._userService.update()
-    // this.saving = true;
-
-    
   }
 
   close(result: any): void {
     this._dialogRef.close(result);
   }
+
 
 
 

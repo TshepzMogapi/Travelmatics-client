@@ -15,4 +15,8 @@ import {  MatDialogRef } from '@angular/material';
       this.dialogRef.close(true);
     }
 
+    onNoClick(): void {
+    this.dialogRef.close(false);
+    }
+
   }

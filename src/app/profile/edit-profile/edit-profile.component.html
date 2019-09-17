@@ -1,4 +1,4 @@
-<form autocomplete="off" #createUserModal="ngForm" (ngSubmit)="save()">
+<form autocomplete="off" #createUserModal="ngForm">
         <h1 mat-dialog-title>Edit Profile</h1>
         <mat-dialog-content style="width: 320px;height: 70vh;">
 
@@ -113,7 +113,10 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput placeholder="Email">
+          <input matInput
+          name="Email"
+          [(ngModel)]="user.emailAddress"
+          placeholder="Email">
         </mat-form-field>
 
         <mat-action-row>

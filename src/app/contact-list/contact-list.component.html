@@ -17,23 +17,24 @@ position: fixed;margin: 25px;"
   <div *ngFor="let contact of contacts">
     <mat-card style="margin: 15px 0px 15px 0px">
       <mat-card-content>
-        <mat-grid-list cols="{{ isAppMobile ? 1 : 3 }}" >
+        <mat-grid-list cols="{{ isAppMobile ? 1 : 3 }}" rowHeight="350px">
 
-                <div
-                *ngIf="isAppMobile"
-                style="flex-direction: row-reverse;
-                display: flex;"
-              >
-                <mat-icon style="margin:10px;" (click)="editContact()"
-                  >edit</mat-icon
-                >
 
-                <mat-icon
-                  style="margin:10px;float: right;"
-                  (click)="deleteContact()"
-                  >delete</mat-icon
-                >
-              </div>
+          <div
+            *ngIf="isAppMobile"
+            style="flex-direction: row-reverse;
+            display: flex;height: 40px;"
+          >
+            <mat-icon style="margin:10px;" (click)="editContact()"
+              >edit</mat-icon
+            >
+
+            <mat-icon
+              style="margin:10px;float: right;"
+              (click)="deleteContact()"
+              >delete</mat-icon
+            >
+          </div>
 
           <mat-grid-tile colspan="1" style="margin-top: 25px;">
             <div class="text-center">
