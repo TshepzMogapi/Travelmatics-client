@@ -43,6 +43,7 @@ import { EditContactComponent } from './contact-list/contact/edit-contact/edit-c
 import { CreateContactComponent } from './contact-list/contact/create-contact/create-contact.component';
 import { ProfileComponent } from './profile/profile.component';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
+import { ConfirmationDialog } from './contact-list/contact/confirmation-dialog';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { EditProfileComponent } from './profile/edit-profile/edit-profile.compon
     CreateContactComponent,
     ProfileComponent,
     EditProfileComponent,
+    ConfirmationDialog
   ],
   imports: [
     CommonModule,
@@ -103,6 +105,8 @@ import { EditProfileComponent } from './profile/edit-profile/edit-profile.compon
     ResetPasswordDialogComponent,
 
     EditProfileComponent,
+
+    ConfirmationDialog,
 
 
     // Contacts

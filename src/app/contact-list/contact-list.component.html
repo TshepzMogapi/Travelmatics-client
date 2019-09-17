@@ -1,136 +1,141 @@
+<!-- <div
+  style="z-index: 100;
 
-
-<div style="z-index: 100;
-
-position: fixed;margin: 25px;">
-
-<span> <mat-icon>list</mat-icon></span>
-<span> <mat-icon>grid_on</mat-icon></span>
-<span> <button mat-raised-button (click)="addContact()">
-    <mat-icon>add</mat-icon> &nbsp;&nbsp;Add
-</button></span>
-
-<!-- <div>
-    <div> 
-        <mat-icon>list</mat-icon>
-    </div>
-    
-    <div>
-        <mat-icon>grid_on</mat-icon>
-    </div>
-    
-    
+position: fixed;margin: 25px;"
+>
+  <span> <mat-icon>list</mat-icon></span>
+  <span> <mat-icon>grid_on</mat-icon></span>
+  <span>
     <button mat-raised-button (click)="addContact()">
       <mat-icon>add</mat-icon> &nbsp;&nbsp;Add
-    </button>
+    </button></span
+  >
 
 </div> -->
 
-
-
-</div>
-
 <div style="margin-top: 100px;">
-
   <div *ngFor="let contact of contacts">
     <mat-card style="margin: 15px 0px 15px 0px">
-
-      <mat-card-header *ngIf="isAppMobile" style="float:right;">
-
-        <!-- on mobile ? -->
-        <mat-icon style="margin:10px;">delete</mat-icon>
-
-        <mat-icon style="margin:10px;">edit</mat-icon>
-      
-      </mat-card-header>
-
       <mat-card-content>
+        <mat-grid-list cols="{{ isAppMobile ? 1 : 3 }}" >
 
-            <mat-grid-list cols="{{isAppMobile ? 1 : 3}}">
+                <div
+                *ngIf="isAppMobile"
+                style="flex-direction: row-reverse;
+                display: flex;"
+              >
+                <mat-icon style="margin:10px;" (click)="editContact()"
+                  >edit</mat-icon
+                >
 
-                    <mat-grid-tile colspan="1">
-                            <img
-                            src="assets/images/user.png"
-                            style="border-radius: 50%;height:150px;width: 150px;"
-                          />
-                    </mat-grid-tile>
+                <mat-icon
+                  style="margin:10px;float: right;"
+                  (click)="deleteContact()"
+                  >delete</mat-icon
+                >
+              </div>
 
-                    <mat-grid-tile colspan="1" >
-                        <div>
-                            <h3>
-                                {{ contact.firstName }}
-                                <span>{{ contact.lastName }}</span>
-                            </h3>
-                            <div>{{contact.type}}</div>
-                            <br>
+          <mat-grid-tile colspan="1" style="margin-top: 25px;">
+            <div class="text-center">
+              <img
+                src="assets/images/user.png"
+                style="border-radius: 50%;height:75px;width: 75px;"
+              />
 
+              <br/>
+              <h3>
+                {{ contact.firstName }}
+                <span>{{ contact.lastName }}</span>
+              </h3>
 
-                            <div>
-                                <mat-icon>mail_outline</mat-icon>
-                                {{contact.emailAddress}}
-                            </div>
+              <div>{{ contact.type }}</div>
+              <br />
 
-                            <div>
-                                    <mat-icon>public</mat-icon>
-                                    {{contact.emailAddress}}
-                                </div>
+              <div>
+                <mat-icon>mail_outline</mat-icon>
+                {{ contact.emailAddress }}
+              </div>
 
-                                <div>
-                                        <mat-icon>dialpad</mat-icon>
-                                        0122555265
-                                    </div>
+              <div>
+                <mat-icon>public</mat-icon>
+                {{ contact.webAddress }}
+              </div>
 
-                            <div>
+              <div>
+                <mat-icon>dialpad</mat-icon>
+                0122555265
+              </div>
+            </div>
+          </mat-grid-tile>
 
-                            </div>
-                        </div>
-                    </mat-grid-tile>
+          <!-- <mat-grid-tile colspan="1">
+            <div>
+               <h3>
+                {{ contact.firstName }}
+                <span>{{ contact.lastName }}</span>
+              </h3>
+              <div>{{ contact.type }}</div>
+              <br />
 
-                    <mat-grid-tile colspan="1">
-                        <!-- not mobile or grid view -->
-                        <div *ngIf="!isAppMobile">
+              <div>
+                <mat-icon>mail_outline</mat-icon>
+                {{ contact.emailAddress }}
+              </div>
 
-                            <button 
-                            (click)="editContact({})"
-                            style=" -webkit-appearance: none;
+              <div>
+                <mat-icon>public</mat-icon>
+                {{ contact.emailAddress }}
+              </div>
+
+              <div>
+                <mat-icon>dialpad</mat-icon>
+                0122555265
+              </div>
+
+              <div></div>
+            </div>
+          </mat-grid-tile> -->
+
+          <mat-grid-tile colspan="1" *ngIf="!isAppMobile">
+            <!-- not mobile or grid view -->
+            <div>
+              <button
+                (click)="editContact({})"
+                style=" -webkit-appearance: none;
                             background-color: white;
                             border: 0px;
                             margin-right: auto;
-                            margin-left: auto;">
-                            <i class="material-icons">
-                                    edit
-                                    </i>
-                            <div>Edit</div>
-                            </button>
+                            margin-left: auto;"
+              >
+                <i class="material-icons">
+                  edit
+                </i>
+                <div>Edit</div>
+              </button>
 
-                         
-                            <button 
-                            
-                            style=" -webkit-appearance: none;
+              <button
+                (click)="deleteContact()"
+                style=" -webkit-appearance: none;
                             background-color: white;
                             border: 0px;
                             margin-right: auto;
-                            margin-left: auto;">
-                    <i class="material-icons">
-                            delete
-                            </i>
-                            <div>Delete</div>
-            </button>
-                        </div>
-                        
+                            margin-left: auto;"
+              >
+                <i class="material-icons">
+                  delete
+                </i>
+                <div>Delete</div>
+              </button>
+            </div>
 
-                        <!-- FB Twitter LinkediN -->
-                    </mat-grid-tile>
-
-                </mat-grid-list>
-
-
+            <!-- FB Twitter LinkediN -->
+          </mat-grid-tile>
+        </mat-grid-list>
       </mat-card-content>
     </mat-card>
-
   </div>
 
   <button mat-raised-button style="float: right;" (click)="addContact()">
-      <mat-icon>add</mat-icon> &nbsp;&nbsp;Add
+    <mat-icon>add</mat-icon> &nbsp;&nbsp;Add
   </button>
 </div>
