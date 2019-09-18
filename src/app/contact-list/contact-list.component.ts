@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material';
 import { CreateContactComponent } from './contact/create-contact/create-contact.component';
 import { EditContactComponent } from './contact/edit-contact/edit-contact.component';
 import { ConfirmationDialog } from './contact/confirmation-dialog';
+import { UtilService } from '@app/util.service';
 
 
 @Component({
@@ -39,14 +40,17 @@ export class ContactListComponent implements OnInit {
     }];
 
   constructor(
+    public utilService: UtilService,
 
-    private _dialog: MatDialog) {
+    private _dialog: MatDialog
+
+    ) {
 
 
    }
 
   ngOnInit() {
-    this.isAppMobile = this.isDeviceMobile(window);
+    this.isAppMobile = this.utilService.isDeviceMobile(window);
   }
 
   addContact() {
@@ -105,14 +109,5 @@ export class ContactListComponent implements OnInit {
     // });
 }
 
-isDeviceMobile(window): boolean {
-
-  if (window.outerWidth < 400) {
-      return true;
-  } else {
-      return false;
-  }
-
-}
 
 }

@@ -51,19 +51,26 @@ export class RegisterComponent extends AppComponentBase {
         })
       )
       .subscribe((result: RegisterOutput) => {
+
+        console.log(result);
+
         if (!result.canLogin) {
           this.notify.success(this.l('SuccessfullyRegistered'));
           this._router.navigate(['/login']);
           return;
         }
 
-        // Autheticate
-        this.saving = true;
-        this._loginService.authenticateModel.userNameOrEmailAddress = this.model.userName;
-        this._loginService.authenticateModel.password = this.model.password;
-        this._loginService.authenticate(() => {
-          this.saving = false;
-        });
+        // // Autheticate
+        // this.saving = true;
+        // this._loginService.authenticateModel.userNameOrEmailAddress = this.model.userName;
+
+        // console.log('authenticateModel.userNameOrEmailAddress');
+        // this._loginService.authenticateModel.password = this.model.password;
+        // console.log('authenticateModel.password');
+
+        // this._loginService.authenticate(() => {
+        //   this.saving = false;
+        // });
       });
   }
 }

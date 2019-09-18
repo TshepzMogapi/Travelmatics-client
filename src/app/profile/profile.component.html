@@ -1,4 +1,4 @@
-<!-- 
+<!--
 <mat-grid-list cols="1" rowHeight="200px">
         <mat-grid-tile colspan="1">
                 <img
@@ -6,7 +6,7 @@
                 style="border-radius: 50%;height:150px;width: 150px;"
               />
 
-              
+
         </mat-grid-tile>
 
         <mat-grid-tile colspan="1">
@@ -17,7 +17,7 @@
 
         </mat-grid-tile>
 
-        
+
 
 </mat-grid-list> -->
 
@@ -37,7 +37,7 @@
           <mat-icon>edit</mat-icon> &nbsp;&nbsp;Edit Profile
       </button>
 
-    
+
   </div>
 
 
@@ -47,7 +47,9 @@
 <div style="width: 100%;margin-left: auto;margin-right:auto;">
 
 
-        <mat-tab-group mat-align-tabs="center" style="width: 300px">
+        <mat-tab-group mat-align-tabs="center"
+        [ngStyle]="{'width':isAppMobile ? '300px' : 'auto' }"
+        style="width: auto;">
 
                 <mat-tab label="Bio">
 
@@ -77,7 +79,7 @@
                                       <span style="margin:16px;">Male</span>
 
 
-                                      <br>  
+                                      <br>
                                       <mat-divider></mat-divider>
 
                                       <h4>Contact Details</h4>
@@ -102,8 +104,8 @@
                         <span>
                           Primary
                         </span>
-                      
-                     
+
+
 
                 </mat-tab>
               </mat-tab-group>
@@ -111,7 +113,7 @@
 </div>
 
 
-                
-                
+
+
 
 

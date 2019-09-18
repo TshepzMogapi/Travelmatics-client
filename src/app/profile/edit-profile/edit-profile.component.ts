@@ -12,6 +12,7 @@ import {
   UserDto,
   RoleDto
 } from '@shared/service-proxies/service-proxies';
+import { UtilService } from '@app/util.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -19,6 +20,8 @@ import {
   styleUrls: ['./edit-profile.component.css']
 })
 export class EditProfileComponent extends AppComponentBase implements OnInit {
+
+  isAppMobile= false;
   saving = false;
 
   user: UserDto = new UserDto();
@@ -32,6 +35,7 @@ export class EditProfileComponent extends AppComponentBase implements OnInit {
 
   constructor(
     injector: Injector,
+    public utilService: UtilService,
     public _userService: UserServiceProxy,
     private _dialogRef: MatDialogRef<EditProfileComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) private _id: number
@@ -41,6 +45,10 @@ export class EditProfileComponent extends AppComponentBase implements OnInit {
   }
 
   ngOnInit() {
+
+    this.isAppMobile = this.utilService.isDeviceMobile(window);
+
+
     this._userService.get(this._id).subscribe(result => {
       this.user = result;
     });
