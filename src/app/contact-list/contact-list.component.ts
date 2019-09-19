@@ -5,6 +5,8 @@ import { CreateContactComponent } from './contact/create-contact/create-contact.
 import { EditContactComponent } from './contact/edit-contact/edit-contact.component';
 import { ConfirmationDialog } from './contact/confirmation-dialog';
 import { UtilService } from '@app/util.service';
+import { ContactServiceProxy, ContactDto } from '@shared/service-proxies/service-proxies';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -16,31 +18,56 @@ export class ContactListComponent implements OnInit {
 
   isAppMobile = false;
 
+  dbContacts: ContactDto[];
+
+  firstName: string;
+
   contacts = [
     {
-      firstName: 'Tshepiso',
-      lastName: 'Mogapi',
-      emailAddress: 'tm@email.com',
-      webAddress: 'tshepzmogapi.com',
-      type: 'Family'
-    },
-    {
-      firstName: 'William',
-      lastName: 'Rhanga',
-      emailAddress: 'qwerty@domain.com',
-      webAddress: 'afl.com.au',
-      type: 'Work'
-    },
-    {
-      firstName: 'Robben',
-      lastName: 'Darwin',
-      emailAddress: 'rm@email.com',
-      webAddress: 'google.com',
-      type: 'Friend'
-    }];
+        "firstName" : "Tshepiso",
+        "lastName" : "Mogapi",
+        "emailAddress" : "tshepzmogapi@email.com",
+        "contactType" : "Family",
+        "contactDetails": [
+            {
+                "emailAddress" : "tshepzmogapi@email.com",
+                "phoneNumber" : "0786781234",
+                "websiteUrl" : "https://tshepzmogapi.com"
+            }
+
+        ]
+
+    }
+];
+
+
+  // contacts = [
+  //   {
+  //     firstName: 'Tshepiso',
+  //     lastName: 'Mogapi',
+  //     emailAddress: 'tm@email.com',
+  //     webAddress: 'tshepzmogapi.com',
+  //     type: 'Family'
+  //   },
+  //   {
+  //     firstName: 'William',
+  //     lastName: 'Rhanga',
+  //     emailAddress: 'qwerty@domain.com',
+  //     webAddress: 'afl.com.au',
+  //     type: 'Work'
+  //   },
+  //   {
+  //     firstName: 'Robben',
+  //     lastName: 'Darwin',
+  //     emailAddress: 'rm@email.com',
+  //     webAddress: 'google.com',
+  //     type: 'Friend'
+  //   }];
 
   constructor(
     public utilService: UtilService,
+
+    private contactService: ContactServiceProxy,
 
     private _dialog: MatDialog
 
@@ -50,10 +77,33 @@ export class ContactListComponent implements OnInit {
    }
 
   ngOnInit() {
+
+    // this.contacts = window.localStorage.contacts;
+
+    console.log(this.contacts);
+
+    // this.contactService.getAllContacts().subscribe(val => console.log(val));;
+
+
+
+
     this.isAppMobile = this.utilService.isDeviceMobile(window);
   }
 
+
+  getContacts(): void {
+
+
+    this.contactService.getAllContacts()
+    .subscribe(results => {
+      console.log(results)
+    });
+  }
+
   addContact() {
+
+    console.log(this.getContacts());
+
     this.manageContactList();
   }
 

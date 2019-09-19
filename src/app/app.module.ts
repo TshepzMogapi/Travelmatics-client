@@ -91,7 +91,9 @@ import { ConfirmationDialog } from './contact-list/contact/confirmation-dialog';
     SharedModule,
     NgxPaginationModule
   ],
-  providers: [],
+  providers: [
+    // ContactServiceProxy
+  ],
   entryComponents: [
     // tenants
     CreateTenantDialogComponent,
