@@ -10,6 +10,9 @@ import { AppAuthService } from '@shared/auth/app-auth.service';
 export class SideBarUserAreaComponent extends AppComponentBase implements OnInit {
 
     shownLoginName = '';
+    userName = '';
+
+    bgColor = '';
 
     constructor(
         injector: Injector,
@@ -19,7 +22,11 @@ export class SideBarUserAreaComponent extends AppComponentBase implements OnInit
     }
 
     ngOnInit() {
-        this.shownLoginName = this.appSession.getShownLoginName();
+
+
+
+        this.bgColor = this.setting.get('App.UiTheme');
+        this.userName = this.appSession.user.userName;
     }
 
     logout(): void {

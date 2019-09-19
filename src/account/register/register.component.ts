@@ -60,17 +60,17 @@ export class RegisterComponent extends AppComponentBase {
           return;
         }
 
-        // // Autheticate
-        // this.saving = true;
-        // this._loginService.authenticateModel.userNameOrEmailAddress = this.model.userName;
+        // Autheticate
+        this.saving = true;
+        this._loginService.authenticateModel.userNameOrEmailAddress = this.model.userName;
 
-        // console.log('authenticateModel.userNameOrEmailAddress');
-        // this._loginService.authenticateModel.password = this.model.password;
-        // console.log('authenticateModel.password');
+        console.log('authenticateModel.userNameOrEmailAddress');
+        this._loginService.authenticateModel.password = this.model.password;
+        console.log('authenticateModel.password');
 
-        // this._loginService.authenticate(() => {
-        //   this.saving = false;
-        // });
+        this._loginService.authenticate(() => {
+          this.saving = false;
+        });
       });
   }
 }

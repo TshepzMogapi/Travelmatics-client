@@ -1,24 +1,31 @@
+    <div  class="profile-item">
+
     <div>
 
-    <div class="text-center">
-        <img src="assets/images/user.png" 
+        <div class="text-center">
+            <h3>{{userName}}</h3>
+        </div>
+        <div style="margin-left: 15px;">
+                <img src="assets/images/user.png"
 
-        width="48" height="48" style="border-radius:50%;" />
-<br>
-        {{shownLoginName}}
+                width="48" height="48" style="border-radius:50%;" />
+                <span style="margin-left:20px">
+                    <mat-icon>edit</mat-icon> &nbsp;&nbsp;Account Settings
+                </span>
+        </div>
+
+        <!-- <span>Settings</span> -->
     </div>
 
-    
+
 
     <br>
 
-    <button mat-raised-button [routerLink]="['/app/profile']" style="margin: 10px">
+    <!-- <button mat-raised-button [routerLink]="['/app/profile']" style="margin: 10px">
         <mat-icon>settings_applications</mat-icon> &nbsp;&nbsp;Settings
-    </button>
+    </button> -->
 
-    <button mat-raised-button (click)="logout()" style="margin: 10px">
-        <mat-icon>power_settings_new</mat-icon> &nbsp;&nbsp;Logout
-    </button>
+
 
 
     <!-- {{appSession.user.emailAddress}} -->

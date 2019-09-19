@@ -1,6 +1,7 @@
 import { Component, Injector, ViewEncapsulation } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
 import { MenuItem } from '@shared/layout/menu-item';
+import { AppAuthService } from '@shared/auth/app-auth.service';
 
 @Component({
     templateUrl: './sidebar-nav.component.html',
@@ -19,6 +20,7 @@ export class SideBarNavComponent extends AppComponentBase {
         new MenuItem(this.l('Users'), 'Pages.Users', 'people', '/app/users'),
         // new MenuItem(this.l('Roles'), 'Pages.Roles', 'local_offer', '/app/roles'),
         new MenuItem(this.l('About'), '', 'info', '/app/about'),
+
 
         // new MenuItem(this.l('MultiLevelMenu'), '', 'menu', '', [
         //     new MenuItem('ASP.NET Boilerplate', '', '', '', [
@@ -39,7 +41,8 @@ export class SideBarNavComponent extends AppComponentBase {
     ];
 
     constructor(
-        injector: Injector
+        injector: Injector,
+        private _authService: AppAuthService
     ) {
         super(injector);
     }
@@ -50,5 +53,9 @@ export class SideBarNavComponent extends AppComponentBase {
         }
 
         return true;
+    }
+
+    logout(): void {
+        this._authService.logout();
     }
 }

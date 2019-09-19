@@ -3,9 +3,13 @@
 <top-bar></top-bar>
 
 <section (window:resize)="onResize($event)">
-    <aside id="leftsidebar" class="sidebar">
+    <aside id="leftsidebar" class="sidebar" style="top:49px;">
+        <a routerLink="/app/profile" style="text-decoration: unset;">
         <sidebar-user-area></sidebar-user-area>
+
+        </a>
         <sidebar-nav></sidebar-nav>
+
         <sidebar-footer></sidebar-footer>
     </aside>
 
