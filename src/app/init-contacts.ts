@@ -8,6 +8,7 @@ export class Init {
       let contacts = [
         {
           id: 1,
+          ownerId: 1,
           firstName: "Tshepiso",
           lastName: "Mogapi",
           emailAddress: "tshepzmogapi@email.com",

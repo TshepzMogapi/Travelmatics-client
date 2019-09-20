@@ -77,6 +77,10 @@ export class CreateContactComponent extends AppComponentBase implements OnInit {
 
     this.localStorageService.addContact(this.localContact);
 
+    this.close({
+
+    });
+
     // this.localStorageService.
 
 

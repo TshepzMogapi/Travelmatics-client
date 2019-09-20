@@ -1,73 +1,77 @@
-import { Injectable } from '@angular/core';
-import { Init } from './init-contacts';
+import { Injectable } from "@angular/core";
+import { Init } from "./init-contacts";
 
 @Injectable()
 export class LocalStorageService extends Init {
-
   constructor() {
     super();
-    console.log('LocalStorageService Works');
+    console.log("LocalStorageService Works");
     this.load();
-   }
+  }
 
-   getContacts() {
-     let contacts = JSON.parse(localStorage.getItem('contacts'));
-     return contacts;
-   }
+  getContacts() {
+    let contacts = JSON.parse(localStorage.getItem("contacts"));
+    return contacts;
+  }
 
-   addContact(newContact) {
+  addContact(newContact) {
+    let nextIndex = this.getNextIdex();
 
-    let tempCs = this.getContacts();
+    newContact.id = nextIndex;
 
-    // tempCs.
+    let contacts = JSON.parse(localStorage.getItem("contacts"));
 
-    let contactsLength = tempCs.length;
+    contacts.push(newContact);
 
-    // if(tempCs[]) {
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+  }
 
-    // }
+  deleteContact(contactId) {
+    let contacts = JSON.parse(localStorage.getItem("contacts"));
 
+    for (let i = 0; i < contacts.length; i++) {
+      if (contacts[i].id === contactId) {
+        console.log("Delete");
+        console.log(contacts);
 
-
-
-      let contacts = JSON.parse(localStorage.getItem('contacts'));
-
-      contacts.push(newContact);
-
-      localStorage.setItem('contacts', JSON.stringify(contacts));
-   }
-
-   deleteContact(contactId) {
-     let contacts = JSON.parse(localStorage.getItem('contacts'));
-
-     for(let i = 0; i <contacts.length; i++) {
-
-      if(contacts[i].text == contactId) {
         contacts.splice(i, 1);
+
+        localStorage.setItem("contacts", JSON.stringify(contacts));
+        // return;
       }
-   }
+    }
 
-      localStorage.setItem('contacts', JSON.stringify(contacts));
-   }
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+  }
 
-     updateContact(newContact){
+  updateContact(newContact) {
+    let contacts = JSON.parse(localStorage.getItem("contacts"));
 
-       let contacts = JSON.parse(localStorage.getItem('contacts'));
-
-     for(let i = 0; i <contacts.length; i++) {
-
+    for (let i = 0; i < contacts.length; i++) {
       console.log(contacts[i]);
 
-      // if(contacts[i].id == newContact.id) {
+      if(contacts[i].id == newContact.id) {
 
+        contacts[i] = newContact;
 
-      //   // contacts[i].id = newContactId;
-      // }
-   }
-      localStorage.setItem('contacts', JSON.stringify(contacts));
-   }
+        localStorage.setItem("contacts", JSON.stringify(contacts));
+      }
+    }
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+  }
 
+  getNextIdex() {
+    let tempCs = this.getContacts();
 
+    let nextIndex: number;
 
+    let arr = [];
+    tempCs.map(tc => {
+      arr.push(tc.id);
+    });
 
+    nextIndex = arr.sort((a, b) => a - b)[arr.length - 1];
+
+    return nextIndex + 2;
+  }
 }

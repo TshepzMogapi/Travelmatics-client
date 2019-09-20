@@ -25,26 +25,6 @@ export class ContactListComponent implements OnInit {
 
   contacts: any[];
 
-//   contacts = [
-//     {
-//         "firstName" : "Tshepiso",
-//         "lastName" : "Mogapi",
-//         "emailAddress" : "tshepzmogapi@email.com",
-//         "contactType" : "Family",
-//         "contactDetails": [
-//             {
-//                 "emailAddress" : "tshepzmogapi@email.com",
-//                 "phoneNumber" : "0786781234",
-//                 "websiteUrl" : "https://tshepzmogapi.com"
-//             }
-
-//         ]
-
-//     }
-// ];
-
-
-
   constructor(
     public utilService: UtilService,
 
@@ -68,31 +48,23 @@ export class ContactListComponent implements OnInit {
   }
 
 
-  // getContacts(): void {
 
-
-  //   this.contactService.getAllContacts()
-  //   .subscribe(results => {
-  //     console.log(results)
-  //   });
-  // }
 
   addContact() {
-
-    // console.log(this.getContacts());
 
     this.manageContactList();
   }
 
-  openDialog() {
+  openDialog(contact) {
 
     const dialogRef = this._dialog.open(ConfirmationDialog);
-    // const snack = this.snackBar.open('Snack bar open before dialog');
 
     dialogRef.afterClosed().subscribe((confirmDelete: boolean) => {
 
       if(confirmDelete) {
-        console.log('Deleting stuff');
+
+        this.localStoreService.deleteContact(contact.id)
+
       } else{
         console.log('Nothing will happen');
 
@@ -101,9 +73,9 @@ export class ContactListComponent implements OnInit {
     });
   }
 
-  deleteContact() {
+  deleteContact(contact) {
 
-    this.openDialog();
+    this.openDialog(contact);
 
     console.log("Are U sure");
 

@@ -36,13 +36,13 @@ position: fixed;margin: 25px;right: 10px;">
             style="flex-direction: row-reverse;
             display: flex;height: 40px;"
           >
-            <mat-icon style="margin:10px;" (click)="editContact()"
+            <mat-icon style="margin:10px;" (click)="editContact(contact)"
               >edit</mat-icon
             >
 
             <mat-icon
               style="margin:10px;float: right;"
-              (click)="deleteContact()"
+              (click)="deleteContact(contact)"
               >delete</mat-icon
             >
           </div>
@@ -55,31 +55,44 @@ position: fixed;margin: 25px;right: 10px;">
               />
 
               <br/>
-              <div *ngIf="isAppMobile">
+
+              <div *ngIf="isAppMobile" style="text-align: left">
                   <h3>
-                      {{ contact.firstName }}
-                      <span>{{ contact.lastName }}</span>
-                    </h3>
+                   {{ contact.firstName }}
+                   <span>{{ contact.lastName }}</span>
+                 </h3>
+                 <div>{{ contact.type }}</div>
+                 <br />
 
-                    <div>{{ contact.contactType }}</div>
-                    <br />
+                 <div>
+                   <a href="{{ contact.contactDetails[0].emailAddress }}">
+                       <mat-icon style="vertical-align: bottom;">mail_outline</mat-icon>
+                       {{ contact.contactDetails[0].emailAddress }}
+                   </a>
 
-                    <div>
-                      <mat-icon>mail_outline</mat-icon>
-                      {{ contact.emailAddress }}
-                    </div>
+                 </div>
 
-                    <div>
-                      <mat-icon>public</mat-icon>
-                      {{ contact.contactDetails[0].websiteUrl }}
-                    </div>
+                 <div style="margin-top:10px;">
+                   <a href="{{ contact.contactDetails[0].websiteUrl }}">
+                       <mat-icon style="vertical-align: bottom;">public</mat-icon>
+                       {{ contact.contactDetails[0].websiteUrl }}
 
-                    <div>
-                      <mat-icon>dialpad</mat-icon>
-                      {{contact.contactDetails[0].phoneNumber}}
-                    </div>
+                   </a>
 
-              </div>
+                 </div>
+
+                 <div style="margin-top:10px;">
+                   <a href="tel:{{ contact.contactDetails[0].phoneNumber }}">
+                       <mat-icon style="vertical-align: bottom;">dialpad</mat-icon>
+                       {{ contact.contactDetails[0].phoneNumber }}
+
+                   </a>
+
+                 </div>
+
+                 <div></div>
+               </div>
+
 
             </div>
           </mat-grid-tile>
@@ -94,9 +107,9 @@ position: fixed;margin: 25px;right: 10px;">
               <br />
 
               <div>
-                <a href=" {{ contact.emailAddress }}">
+                <a href="{{ contact.contactDetails[0].emailAddress }}">
                     <mat-icon style="vertical-align: bottom;">mail_outline</mat-icon>
-                    {{ contact.emailAddress }}
+                    {{ contact.contactDetails[0].emailAddress }}
                 </a>
 
               </div>
@@ -141,7 +154,7 @@ position: fixed;margin: 25px;right: 10px;">
               </button>
 
               <button
-                (click)="deleteContact()"
+                (click)="deleteContact(contact)"
                 style=" -webkit-appearance: none;
                             background-color: white;
                             border: 0px;
