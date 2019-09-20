@@ -12,13 +12,24 @@ position: fixed;margin: 25px;"
   >
 
 </div> -->
+<div style="z-index: 100;
+
+position: fixed;margin: 25px;right: 10px;">
+    <button mat-raised-button style="float: right;" (click)="addContact()">
+        <mat-icon>person_add</mat-icon> &nbsp;&nbsp;Add
+      </button>
+
+</div>
 
 <div style="margin-top: 100px;">
-  <div *ngFor="let contact of contacts">
-    <mat-card style="margin: 15px 0px 15px 0px">
+  <div  *ngFor="let contact of contacts">
+    <mat-card style="margin: 15px 0px 15px 0px;border: 1px solid rgb(97, 125, 138)">
       <mat-card-content>
-        <mat-grid-list cols="{{ isAppMobile ? 1 : 3 }}" rowHeight="350px">
+        <!-- 200px not mobile -->
+        <mat-grid-list cols="{{ isAppMobile ? 1 : 3 }}"
+        [ngStyle]="{ height: isAppMobile ? '320px' : '200px' }"
 
+       >
 
           <div
             *ngIf="isAppMobile"
@@ -44,32 +55,36 @@ position: fixed;margin: 25px;"
               />
 
               <br/>
-              <h3>
-                {{ contact.firstName }}
-                <span>{{ contact.lastName }}</span>
-              </h3>
+              <div *ngIf="isAppMobile">
+                  <h3>
+                      {{ contact.firstName }}
+                      <span>{{ contact.lastName }}</span>
+                    </h3>
 
-              <div>{{ contact.type }}</div>
-              <br />
+                    <div>{{ contact.contactType }}</div>
+                    <br />
 
-              <div>
-                <mat-icon>mail_outline</mat-icon>
-                {{ contact.emailAddress }}
+                    <div>
+                      <mat-icon>mail_outline</mat-icon>
+                      {{ contact.emailAddress }}
+                    </div>
+
+                    <div>
+                      <mat-icon>public</mat-icon>
+                      {{ contact.contactDetails[0].websiteUrl }}
+                    </div>
+
+                    <div>
+                      <mat-icon>dialpad</mat-icon>
+                      {{contact.contactDetails[0].phoneNumber}}
+                    </div>
+
               </div>
 
-              <div>
-                <mat-icon>public</mat-icon>
-                {{ contact.webAddress }}
-              </div>
-
-              <div>
-                <mat-icon>dialpad</mat-icon>
-                0122555265
-              </div>
             </div>
           </mat-grid-tile>
 
-          <!-- <mat-grid-tile colspan="1">
+          <mat-grid-tile colspan="1" *ngIf="!isAppMobile">
             <div>
                <h3>
                 {{ contact.firstName }}
@@ -79,29 +94,40 @@ position: fixed;margin: 25px;"
               <br />
 
               <div>
-                <mat-icon>mail_outline</mat-icon>
-                {{ contact.emailAddress }}
+                <a href=" {{ contact.emailAddress }}">
+                    <mat-icon style="vertical-align: bottom;">mail_outline</mat-icon>
+                    {{ contact.emailAddress }}
+                </a>
+
               </div>
 
-              <div>
-                <mat-icon>public</mat-icon>
-                {{ contact.emailAddress }}
+              <div style="margin-top:10px;">
+                <a href="{{ contact.contactDetails[0].websiteUrl }}">
+                    <mat-icon style="vertical-align: bottom;">public</mat-icon>
+                    {{ contact.contactDetails[0].websiteUrl }}
+
+                </a>
+
               </div>
 
-              <div>
-                <mat-icon>dialpad</mat-icon>
-                0122555265
+              <div style="margin-top:10px;">
+                <a href="tel:{{ contact.contactDetails[0].phoneNumber }}">
+                    <mat-icon style="vertical-align: bottom;">dialpad</mat-icon>
+                    {{ contact.contactDetails[0].phoneNumber }}
+
+                </a>
+
               </div>
 
               <div></div>
             </div>
-          </mat-grid-tile> -->
+          </mat-grid-tile>
 
           <mat-grid-tile colspan="1" *ngIf="!isAppMobile">
             <!-- not mobile or grid view -->
             <div>
               <button
-                (click)="editContact({})"
+                (click)="editContact(contact)"
                 style=" -webkit-appearance: none;
                             background-color: white;
                             border: 0px;
@@ -136,7 +162,7 @@ position: fixed;margin: 25px;"
     </mat-card>
   </div>
 
-  <button mat-raised-button style="float: right;" (click)="getContacts()">
-    <mat-icon>add</mat-icon> &nbsp;&nbsp;Add
+  <button mat-raised-button style="float: right;" (click)="addContact()">
+    <mat-icon>person_add</mat-icon> &nbsp;&nbsp;Add
   </button>
 </div>

@@ -1,81 +1,171 @@
 <form autocomplete="off" #createUserModal="ngForm" (ngSubmit)="save()">
-        <h1 mat-dialog-title>Edit contact</h1>
-        <mat-dialog-content style="width:800px;height:300px;">
-          <mat-tab-group>
-            <mat-tab [label]="'Contact Details'">
-              <br />
-              <div class="row-fluid">
-                <div class="col-md-6">
-                  <mat-form-field>
-                    <input
-                      matInput
-                      name="UserName"
-                      [placeholder]="'name 1'"
-                      
-                      required
-                      minlength="2"
-                      maxlength="32"
-                    />
-                  </mat-form-field>
-                  <mat-form-field>
-                    <input
-                      matInput
-                      name="Name"
-                      [placeholder]="'Relationship'"
-                      
-                      required
-                      maxlength="32"
-                    />
-                  </mat-form-field>
-                
-                 
-                </div>
-                <div class="col-md-6">
-                  <mat-form-field>
-                    <input
-                      matInput
-                      name="EmailAddress"
-                      [placeholder]="'EmailAddress' | localize"
-                     
-                      type="email"
-                      required
-                      maxlength="256"
-                      pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$"
-                    />
-                  </mat-form-field>
-                  <mat-form-field>
-                    <input
-                      matInput
-                      name="Surname"
-                      [placeholder]="'Last Name'"
-                      
-                      required
-                      maxlength="32"
-                    />
-                  </mat-form-field>
-                  
-                </div>
-              </div>
-            </mat-tab>
-            <mat-tab [label]="'Online Presence'">
-              <br />
-             
-            </mat-tab>
-          </mat-tab-group>
-        </mat-dialog-content>
-        <div mat-dialog-actions align="end">
-          <button mat-button type="button" >
-            Cancel
-          </button>
-          <button
-            mat-flat-button
-            type="submit"
-            flex="15"
-            color="primary"
-            
-          >
-          Save
-          </button>
-        </div>
-      </form>
-      
+  <h1 mat-dialog-title>Edit Contact</h1>
+
+
+
+
+<mat-dialog-content style="width: inherit;height: 500px;">
+<mat-tab-group
+mat-align-tabs="center"
+[ngStyle]="{ width: isAppMobile ? '250px' : '600px' }"
+>
+<mat-tab [label]="'Bio'" style="font-size: 10px;">
+<mat-accordion>
+  <mat-expansion-panel
+    [expanded]="step === 0"
+    (opened)="setStep(0)"
+    hideToggle
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h4>Names</h4>
+      </mat-panel-title>
+      <mat-panel-description style="flex-grow:0;">
+        <mat-icon>perm_identity</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-form-field>
+      <input
+        matInput
+        required
+        placeholder="Name"
+
+        [(ngModel)]="contactInput.firstName"
+
+        name="Name"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Last Name"
+        [(ngModel)]="contactInput.lastName"
+
+        name="LastName"
+      />
+    </mat-form-field>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel
+    [expanded]="step === 1"
+    (opened)="setStep(1)"
+    hideToggle
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h4>Contact Details</h4>
+      </mat-panel-title>
+      <mat-panel-description style="flex-grow:0;">
+        <mat-icon>public</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+
+    <mat-form-field>
+      <input matInput
+      name="EmailAddress"
+
+      [(ngModel)]="contactInput.contactDetails[0].emailAddress"
+      placeholder="Email" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput
+      name="PhoneNumber"
+      [(ngModel)]="contactInput.contactDetails[0].phoneNumber"
+      placeholder="Phone Number" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput
+
+      name="WebsiteUrl"
+
+      [(ngModel)]="contactInput.contactDetails[0].websiteUrl"
+
+      placeholder="Website Url" />
+    </mat-form-field>
+  </mat-expansion-panel>
+
+
+</mat-accordion>
+</mat-tab>
+<mat-tab [label]="'Category'" style="font-size: 10xpx;height: 100vh;">
+<div>
+  <mat-accordion>
+    <mat-expansion-panel
+    [expanded]="step === 5"
+    (opened)="setStep(5)"
+    hideToggle
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h4>Gender</h4>
+      </mat-panel-title>
+      <mat-panel-description style="flex-grow:0;">
+        <mat-icon>wc</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-radio-group
+      style="display: flex;
+      flex-direction: column;
+      margin: 15px 0;"
+    >
+      <mat-radio-button
+        style="margin: 5px;"
+        *ngFor="let gender of ['Male', 'Female', 'Non Binary']"
+        [value]="gender"
+      >
+        {{ gender }}
+      </mat-radio-button>
+    </mat-radio-group>
+  </mat-expansion-panel>
+
+
+  <mat-expansion-panel
+  [expanded]="step === 5"
+  (opened)="setStep(5)"
+  hideToggle
+>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <h4>Relationship</h4>
+    </mat-panel-title>
+    <mat-panel-description style="flex-grow:0;">
+      <mat-icon>people_outline</mat-icon>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <mat-checkbox>Friend</mat-checkbox>
+  <br>
+  <mat-checkbox>Family</mat-checkbox>
+  <br>
+  <mat-checkbox>Work</mat-checkbox>
+
+</mat-expansion-panel>
+  </mat-accordion>
+</div>
+</mat-tab>
+</mat-tab-group>
+</mat-dialog-content>
+
+  <div mat-dialog-actions align="end">
+    <button
+    (click)="close()"
+    mat-button type="button" >
+      Cancel
+    </button>
+    <button
+      mat-flat-button
+      type="submit"
+      flex="15"
+      color="primary"
+
+    >
+    Save
+    </button>
+  </div>
+</form>

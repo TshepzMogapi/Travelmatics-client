@@ -44,6 +44,7 @@ import { CreateContactComponent } from './contact-list/contact/create-contact/cr
 import { ProfileComponent } from './profile/profile.component';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 import { ConfirmationDialog } from './contact-list/contact/confirmation-dialog';
+import { LocalStorageService } from './local-storage.service';
 
 @NgModule({
   declarations: [
@@ -93,6 +94,7 @@ import { ConfirmationDialog } from './contact-list/contact/confirmation-dialog';
   ],
   providers: [
     // ContactServiceProxy
+    LocalStorageService
   ],
   entryComponents: [
     // tenants

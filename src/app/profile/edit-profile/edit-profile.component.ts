@@ -13,6 +13,7 @@ import {
   RoleDto
 } from '@shared/service-proxies/service-proxies';
 import { UtilService } from '@app/util.service';
+import { AppSessionService } from '@shared/session/app-session.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -37,6 +38,7 @@ export class EditProfileComponent extends AppComponentBase implements OnInit {
     injector: Injector,
     public utilService: UtilService,
     public _userService: UserServiceProxy,
+    private _appSessionService: AppSessionService,
     private _dialogRef: MatDialogRef<EditProfileComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) private _id: number
   ) {

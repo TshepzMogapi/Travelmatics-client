@@ -7,6 +7,7 @@ import { ConfirmationDialog } from './contact/confirmation-dialog';
 import { UtilService } from '@app/util.service';
 import { ContactServiceProxy, ContactDto } from '@shared/service-proxies/service-proxies';
 import { Observable } from 'rxjs';
+import { LocalStorageService } from '@app/local-storage.service';
 
 
 @Component({
@@ -22,50 +23,32 @@ export class ContactListComponent implements OnInit {
 
   firstName: string;
 
-  contacts = [
-    {
-        "firstName" : "Tshepiso",
-        "lastName" : "Mogapi",
-        "emailAddress" : "tshepzmogapi@email.com",
-        "contactType" : "Family",
-        "contactDetails": [
-            {
-                "emailAddress" : "tshepzmogapi@email.com",
-                "phoneNumber" : "0786781234",
-                "websiteUrl" : "https://tshepzmogapi.com"
-            }
+  contacts: any[];
 
-        ]
+//   contacts = [
+//     {
+//         "firstName" : "Tshepiso",
+//         "lastName" : "Mogapi",
+//         "emailAddress" : "tshepzmogapi@email.com",
+//         "contactType" : "Family",
+//         "contactDetails": [
+//             {
+//                 "emailAddress" : "tshepzmogapi@email.com",
+//                 "phoneNumber" : "0786781234",
+//                 "websiteUrl" : "https://tshepzmogapi.com"
+//             }
 
-    }
-];
+//         ]
+
+//     }
+// ];
 
 
-  // contacts = [
-  //   {
-  //     firstName: 'Tshepiso',
-  //     lastName: 'Mogapi',
-  //     emailAddress: 'tm@email.com',
-  //     webAddress: 'tshepzmogapi.com',
-  //     type: 'Family'
-  //   },
-  //   {
-  //     firstName: 'William',
-  //     lastName: 'Rhanga',
-  //     emailAddress: 'qwerty@domain.com',
-  //     webAddress: 'afl.com.au',
-  //     type: 'Work'
-  //   },
-  //   {
-  //     firstName: 'Robben',
-  //     lastName: 'Darwin',
-  //     emailAddress: 'rm@email.com',
-  //     webAddress: 'google.com',
-  //     type: 'Friend'
-  //   }];
 
   constructor(
     public utilService: UtilService,
+
+    private localStoreService: LocalStorageService,
 
     private contactService: ContactServiceProxy,
 
@@ -78,31 +61,25 @@ export class ContactListComponent implements OnInit {
 
   ngOnInit() {
 
-    // this.contacts = window.localStorage.contacts;
-
-    console.log(this.contacts);
-
-    // this.contactService.getAllContacts().subscribe(val => console.log(val));;
-
-
+    this.contacts = this.localStoreService.getContacts();
 
 
     this.isAppMobile = this.utilService.isDeviceMobile(window);
   }
 
 
-  getContacts(): void {
+  // getContacts(): void {
 
 
-    this.contactService.getAllContacts()
-    .subscribe(results => {
-      console.log(results)
-    });
-  }
+  //   this.contactService.getAllContacts()
+  //   .subscribe(results => {
+  //     console.log(results)
+  //   });
+  // }
 
   addContact() {
 
-    console.log(this.getContacts());
+    // console.log(this.getContacts());
 
     this.manageContactList();
   }
@@ -132,23 +109,22 @@ export class ContactListComponent implements OnInit {
 
   }
 
-  editContact(contactDto: any) {
+  editContact(contact: any) {
 
-    this.manageContactList(5);
-
+    this.manageContactList(contact);
 
   }
 
-  private manageContactList(id?: number): void {
+  private manageContactList(contact?: number): void {
 
     let createOrEditContactDialog;
-    if (id === undefined || id <= 0) {
+    if (contact === undefined ) {
         createOrEditContactDialog = this._dialog.open(CreateContactComponent);
     }
 
     else {
         createOrEditContactDialog = this._dialog.open(EditContactComponent, {
-            data: id
+            data: contact
         });
     }
 
