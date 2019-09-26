@@ -46,6 +46,8 @@ import { EditProfileComponent } from './profile/edit-profile/edit-profile.compon
 import { ConfirmationDialog } from './contact-list/contact/confirmation-dialog';
 import { LocalStorageService } from './local-storage.service';
 
+import { NgxMaskModule } from 'ngx-mask';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,6 +88,7 @@ import { LocalStorageService } from './local-storage.service';
     HttpClientModule,
     HttpClientJsonpModule,
     ModalModule.forRoot(),
+    NgxMaskModule.forRoot(),
     AbpModule,
     AppRoutingModule,
     ServiceProxyModule,

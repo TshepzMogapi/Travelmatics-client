@@ -1,4 +1,5 @@
 import { Component, Injector, Optional, Inject, OnInit } from '@angular/core';
+import {FormGroup, FormBuilder, FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {
   MAT_DIALOG_DATA,
   MatDialogRef,
@@ -22,6 +23,13 @@ import { AppSessionService } from '@shared/session/app-session.service';
 })
 export class EditProfileComponent extends AppComponentBase implements OnInit {
 
+  profileValidations: FormGroup;
+
+  emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
+
   isAppMobile= false;
   saving = false;
 
@@ -30,6 +38,15 @@ export class EditProfileComponent extends AppComponentBase implements OnInit {
   roles: RoleDto[] = [];
   checkedRolesMap: { [key: string]: boolean } = {};
 
+  userPersonalData = {
+    idNumber: null,
+    age: null,
+    passPortNumber: null,
+    gender: null,
+    mobileNumber: null
+
+  }
+
 
 
   step = 0;
@@ -37,6 +54,7 @@ export class EditProfileComponent extends AppComponentBase implements OnInit {
   constructor(
     injector: Injector,
     public utilService: UtilService,
+    private formBuilder: FormBuilder,
     public _userService: UserServiceProxy,
     private _appSessionService: AppSessionService,
     private _dialogRef: MatDialogRef<EditProfileComponent>,
@@ -47,6 +65,7 @@ export class EditProfileComponent extends AppComponentBase implements OnInit {
   }
 
   ngOnInit() {
+
 
     this.isAppMobile = this.utilService.isDeviceMobile(window);
 

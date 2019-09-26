@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Init } from "./init-contacts";
+import { Observable, of } from "rxjs";
 
 @Injectable()
 export class LocalStorageService extends Init {
@@ -11,6 +12,7 @@ export class LocalStorageService extends Init {
 
   getContacts() {
     let contacts = JSON.parse(localStorage.getItem("contacts"));
+
     return contacts;
   }
 

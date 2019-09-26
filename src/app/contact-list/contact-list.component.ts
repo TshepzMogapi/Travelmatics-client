@@ -8,6 +8,7 @@ import { UtilService } from '@app/util.service';
 import { ContactServiceProxy, ContactDto } from '@shared/service-proxies/service-proxies';
 import { Observable } from 'rxjs';
 import { LocalStorageService } from '@app/local-storage.service';
+import { AppSessionService } from '@shared/session/app-session.service';
 
 
 @Component({
@@ -25,8 +26,12 @@ export class ContactListComponent implements OnInit {
 
   contacts: any[];
 
+  appSession: AppSessionService;
+
   constructor(
     public utilService: UtilService,
+
+    private appSessionService: AppSessionService,
 
     private localStoreService: LocalStorageService,
 
@@ -41,7 +46,10 @@ export class ContactListComponent implements OnInit {
 
   ngOnInit() {
 
-    this.contacts = this.localStoreService.getContacts();
+    this.appSession = this.appSessionService;
+
+    this.contacts = this.localStoreService.getContacts()
+    .filter(c => c.ownerId === this.appSession.user.id);
 
 
     this.isAppMobile = this.utilService.isDeviceMobile(window);

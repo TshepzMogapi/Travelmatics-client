@@ -1,4 +1,4 @@
-<form autocomplete="off" #createUserModal="ngForm">
+<form autocomplete="off" #editProfileModal="ngForm">
   <h1 mat-dialog-title>Edit Profile</h1>
 
   <!-- style="width:800px;height:500px;" -->
@@ -28,8 +28,21 @@
                 matInput
                 placeholder="Name"
                 [(ngModel)]="user.name"
-                name="UserName"
+                name="FirstName"
+                required
+                #FirstName="ngModel"
+                minlength="2"
+
               />
+
+              <mat-error *ngIf="FirstName.errors?.required">
+                First Name is Required!
+              </mat-error>
+
+              <mat-error *ngIf="FirstName.errors?.minlength">
+                First Name must be at least 2 characters long.
+              </mat-error>
+
             </mat-form-field>
 
             <mat-form-field>
@@ -37,8 +50,22 @@
                 matInput
                 placeholder="Last Name"
                 [(ngModel)]="user.surname"
+                required
+                minlength="2"
                 name="SurName"
+                #SurName="ngModel"
               />
+
+              <mat-error *ngIf="SurName.errors?.required">
+                Last Name is Required!
+              </mat-error>
+
+              <mat-error *ngIf="SurName.errors?.minlength">
+                Last Name must be at least 2 characters long.
+              </mat-error>
+
+
+
             </mat-form-field>
           </mat-expansion-panel>
 
@@ -81,11 +108,38 @@
               </mat-panel-description>
             </mat-expansion-panel-header>
             <mat-form-field>
-              <input matInput placeholder="ID Number" name="IdNumber" />
+              <input matInput
+              placeholder="ID Number"
+              name="IdNumber"
+              required
+
+              type="number"
+
+              [(ngModel)]="userPersonalData.idNumber"
+              #IdNumber="ngModel"
+              pattern=".{13}"
+              />
+
+              <mat-error *ngIf="IdNumber.errors?.required">
+                Id Number is Required!
+              </mat-error>
+
+              <mat-error *ngIf="IdNumber.errors?.pattern">
+                Id Number must be 13 numbers!
+              </mat-error>
             </mat-form-field>
 
             <mat-form-field>
-              <input matInput placeholder="Age" />
+              <input matInput
+              placeholder="Age"
+              name="Age"
+              required
+              [(ngModel)]="userPersonalData.age"
+              #Age="ngModel"
+              />
+              <mat-error *ngIf="Age.errors?.required">
+                Age is required
+              </mat-error>
             </mat-form-field>
 
             <mat-form-field>
@@ -141,16 +195,40 @@
             </mat-expansion-panel-header>
 
             <mat-form-field>
-              <input matInput placeholder="Mobile Number" />
+              <input
+              matInput
+              name="MobileNumber"
+              placeholder="Mobile Number"
+              [(ngModel)]="userPersonalData.mobileNumber"
+              required
+              #MobileNumber="ngModel"
+              />
+
+              <mat-error *ngIf="MobileNumber.errors?.required">
+                A contact number is required.
+              </mat-error>
+
             </mat-form-field>
 
             <mat-form-field>
               <input
                 matInput
                 name="Email"
+                pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                required
                 [(ngModel)]="user.emailAddress"
                 placeholder="Email"
+                #Email="ngModel"
               />
+
+              <mat-error *ngIf="Email.errors?.required">
+                An email address is required.
+              </mat-error>
+
+              <mat-error *ngIf="Email.errors?.pattern">
+                A valid email is required.
+              </mat-error>
+
             </mat-form-field>
           </mat-expansion-panel>
         </mat-accordion>
@@ -171,6 +249,9 @@
 
               <mat-form-field>
                 <input matInput placeholder="Age" />
+                <mat-error>
+                  Please enter a valid number
+                </mat-error>
               </mat-form-field>
             </mat-expansion-panel>
           </mat-accordion>
@@ -179,7 +260,7 @@
     </mat-tab-group>
   </mat-dialog-content>
   <div mat-dialog-actions align="end">
-    <button mat-button type="button">
+    <button mat-button type="button" (click)="close()">
       Cancel
     </button>
     <button
