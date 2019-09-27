@@ -1,5 +1,5 @@
 <label class="hoverable" for="fileInput" style="    margin: 0px auto 0px auto;">
-    <img [src]="url ? url : 'https://firebasestorage.googleapis.com/v0/b/travelmantics-2e7c6.appspot.com/o/Images?alt=media&token=aa62a46c-dd81-4788-ae77-5d34079764c8'">
+    <img [src]="url ? url : user.profilePicUrl">
     <div class="hover-text">
       Choose file
       <h4 class="success-message" *ngIf="url"> Uploaded Successfully </h4>
@@ -7,19 +7,14 @@
     <div class="background"></div>
   </label>
   <br/>
-  <input id="fileInput" type='file' (change)="onSelectFile($event)">
-  <button *ngIf="url" (click)="delete()">delete</button>
+  <input id="fileInput" type='file' (change)="uploadFile($event)">
 
 
-
-  <!-- <input type="file" (change)="uploadFile($event)" />
-  <div>{{ uploadPercent | async }}</div>
-  <a [href]="downloadURL | async">{{ downloadURL | async }}</a>
-  <br> -->
 
   <div>
   <input type="file" (change)="uploadFile($event)" style="margin:auto;"/>
-  <button mat-raised-button (click)="upload()" style="margin: 10px">
+
+  <button *ngIf="file" mat-raised-button (click)="upload()" style="margin: 10px">
     <mat-icon>cloud_upload</mat-icon> &nbsp;&nbsp; Upload
 </button>
   </div>

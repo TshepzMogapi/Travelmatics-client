@@ -88,6 +88,8 @@ export class ProfileImageComponent extends AppComponentBase implements OnInit {
      )
     .subscribe();
 
+    console.log(this.file);
+
 
 
   }
@@ -108,6 +110,7 @@ export class ProfileImageComponent extends AppComponentBase implements OnInit {
       this.notify.info(this.l('SavedSuccessfully'));
     });
 
+    location.reload();
 
 
   }

@@ -83,7 +83,11 @@ export class EditProfileComponent extends AppComponentBase implements OnInit {
 
     this._userService.get(this._id).subscribe(result => {
       this.user = result;
+
+      this.getMoreInfo();
     });
+
+
 
     // this._userService.getRoles().subscribe(result2 => {
     //   this.roles = result2.items;
@@ -127,24 +131,25 @@ export class EditProfileComponent extends AppComponentBase implements OnInit {
 
   getMoreInfo() {
 
+    console.log(this.user);
 
 
-    this.userPersonalData.dob.dayOfBirth = this.userPersonalData.idNumber.toString().substring(4,6);
-    this.userPersonalData.dob.monthOfBirth = this.userPersonalData.idNumber.toString().substring(2,4);
-    this.userPersonalData.dob.yearOfBirth = this.userPersonalData.idNumber.toString().substring(0,2);
+
+    this.userPersonalData.dob.dayOfBirth = this.user.idNumber.toString().substring(4,6);
+    this.userPersonalData.dob.monthOfBirth = this.user.idNumber.toString().substring(2,4);
+    this.userPersonalData.dob.yearOfBirth = this.user.idNumber.toString().substring(0,2);
 
     this.userPersonalData.dob.fullDate = new Date(
       this.userPersonalData.dob.yearOfBirth,
-      parseInt(this.userPersonalData.idNumber.toString().substring(2,4)) - 1,
+      parseInt(this.user.idNumber.toString().substring(2,4)) - 1,
       this.userPersonalData.dob.dayOfBirth);
 
       this.date = new FormControl(this.userPersonalData.dob.fullDate);
 
-      console.log(this.userPersonalData.dob.fullDate);
 
-    this.userPersonalData.gender = this.getGender(this.userPersonalData.idNumber.toString().substring(6,10))
+    this.userPersonalData.gender = this.getGender(this.user.idNumber.toString().substring(6,10))
 
-    console.log(this.user);
+    // console.log(this.userPersonalData.gender);
 
   }
 
