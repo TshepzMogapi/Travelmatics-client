@@ -70,31 +70,6 @@
           </mat-expansion-panel>
 
           <mat-expansion-panel
-            [expanded]="step === 1"
-            (opened)="setStep(1)"
-            hideToggle
-          >
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                <h4>Citizenship</h4>
-              </mat-panel-title>
-              <mat-panel-description style="flex-grow:0;">
-                <mat-icon>public</mat-icon>
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-
-            <mat-checkbox>SA Citizen</mat-checkbox>
-
-            <mat-form-field>
-              <input matInput placeholder="Country of Birth" />
-            </mat-form-field>
-
-            <mat-form-field>
-              <input matInput placeholder="Citizenship" />
-            </mat-form-field>
-          </mat-expansion-panel>
-
-          <mat-expansion-panel
             [expanded]="step === 2"
             (opened)="setStep(2)"
             hideToggle
@@ -113,9 +88,11 @@
               name="IdNumber"
               required
 
+              (keyup)="!IdNumber.errors?.pattern ? getMoreInfo($event) : doNothing()"
+
               type="number"
 
-              [(ngModel)]="userPersonalData.idNumber"
+              [(ngModel)]="user.idNumber"
               #IdNumber="ngModel"
               pattern=".{13}"
               />
@@ -134,7 +111,7 @@
               placeholder="Age"
               name="Age"
               required
-              [(ngModel)]="userPersonalData.age"
+              [(ngModel)]="user.age"
               #Age="ngModel"
               />
               <mat-error *ngIf="Age.errors?.required">
@@ -147,38 +124,15 @@
                 matInput
                 placeholder="Passport Number"
                 name="PassPortNumber"
+                [(ngModel)]="user.passportNumber"
               />
             </mat-form-field>
           </mat-expansion-panel>
 
-          <mat-expansion-panel
-            [expanded]="step === 3"
-            (opened)="setStep(3)"
-            hideToggle
-          >
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                <h4>Gender</h4>
-              </mat-panel-title>
-              <mat-panel-description style="flex-grow:0;">
-                <mat-icon>wc</mat-icon>
-              </mat-panel-description>
-            </mat-expansion-panel-header>
 
-            <mat-radio-group
-              style="display: flex;
-              flex-direction: column;
-              margin: 15px 0;"
-            >
-              <mat-radio-button
-                style="margin: 5px;"
-                *ngFor="let gender of ['Male', 'Female', 'Non Binary']"
-                [value]="gender"
-              >
-                {{ gender }}
-              </mat-radio-button>
-            </mat-radio-group>
-          </mat-expansion-panel>
+
+
+
 
           <mat-expansion-panel
             [expanded]="step === 4"
@@ -233,29 +187,93 @@
           </mat-expansion-panel>
         </mat-accordion>
       </mat-tab>
-      <mat-tab [label]="'Preferences'" style="font-size: 10xpx;height: 100vh;">
-        <div>
-          <mat-accordion>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Personal data
-                </mat-panel-title>
-              </mat-expansion-panel-header>
+      <mat-tab [label]="'More Info'" style="font-size: 10xpx;height: 100vh;">
 
-              <mat-form-field>
-                <input matInput placeholder="First name" />
+        <mat-accordion>
+
+            <mat-expansion-panel
+            [expanded]="step === 3"
+            (opened)="setStep(3)"
+            hideToggle
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h4>Gender</h4>
+              </mat-panel-title>
+              <mat-panel-description style="flex-grow:0;">
+                <mat-icon>wc</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <mat-radio-group
+              style="display: flex;
+              flex-direction: column;
+              margin: 15px 0;"
+              name="Gender"
+              [(ngModel)]="userPersonalData.gender"
+
+            >
+              <mat-radio-button
+                style="margin: 5px;"
+                *ngFor="let gender of genders"
+                [value]="gender"
+              >
+                {{ gender }}
+              </mat-radio-button>
+            </mat-radio-group>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel
+          [expanded]="step === 1"
+          (opened)="setStep(1)"
+          hideToggle
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <h4>Citizenship</h4>
+            </mat-panel-title>
+            <mat-panel-description style="flex-grow:0;">
+              <mat-icon>public</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <mat-checkbox>SA Citizen</mat-checkbox>
+
+          <mat-form-field>
+            <input matInput placeholder="Country of Birth" />
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Citizenship" />
+          </mat-form-field>
+        </mat-expansion-panel>
+
+          <mat-expansion-panel
+            [expanded]="step === 0"
+            (opened)="setStep(0)"
+            hideToggle
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h4>Date of Birth</h4>
+              </mat-panel-title>
+              <mat-panel-description style="flex-grow:0;">
+                <mat-icon>date_range</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker3" placeholder="Date of Birth"
+                [value]="userPersonalData.dob.fullDate">
+                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                <mat-datepicker #picker3></mat-datepicker>
               </mat-form-field>
 
-              <mat-form-field>
-                <input matInput placeholder="Age" />
-                <mat-error>
-                  Please enter a valid number
-                </mat-error>
-              </mat-form-field>
-            </mat-expansion-panel>
-          </mat-accordion>
-        </div>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+
+
       </mat-tab>
     </mat-tab-group>
   </mat-dialog-content>

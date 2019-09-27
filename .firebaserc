@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "tshepz-test",
+    "testing": "tshepz-test"
+  }
+}

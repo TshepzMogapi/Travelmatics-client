@@ -23,12 +23,9 @@
 
 <div class="text-center">
 
-  <div>
+  <div class="text-center">
 
-      <img
-      src="assets/images/user.png"
-      style="border-radius: 50%;height:150px;width: 150px;"
-    />
+    <app-profile-image></app-profile-image>
 
   </div>
 
@@ -58,19 +55,19 @@
                             <label style="margin:16px;">
                               Name
                               </label>
-                              <span style="margin:16px;">Tshepiso</span>
+                              <span style="margin:16px;">{{user.name}}</span>
 
                               <br>
 
                               <label style="margin:16px;">
                                   Surname
                                   </label>
-                                  <span style="margin:16px;">Mogapi</span>
+                                  <span style="margin:16px;">{{user.surname}}</span>
                                   <br>
                                   <label style="margin:16px;">
                                       ID Number
                                       </label>
-                                      <span style="margin:16px;"> 991332 6784 099</span>
+                                      <span style="margin:16px;"> {{user.idNumber}}</span>
 
                                   <br>
                                   <label style="margin:16px;">
@@ -92,10 +89,11 @@
                                       <label style="margin:16px;">
                                           Email
                                           </label>
-                                          <span style="margin:16px;">cool-testing.email@gmail.com</span>
+                                          <span style="margin:16px;">
+                                           {{user.emailAddress}}</span>
                 </mat-tab>
 
-                <mat-tab label="Preferences">
+                <mat-tab label="More info">
 
                     <label style="margin:16px;">
                         Theme

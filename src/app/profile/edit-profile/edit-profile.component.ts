@@ -16,6 +16,8 @@ import {
 import { UtilService } from '@app/util.service';
 import { AppSessionService } from '@shared/session/app-session.service';
 
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
@@ -23,12 +25,10 @@ import { AppSessionService } from '@shared/session/app-session.service';
 })
 export class EditProfileComponent extends AppComponentBase implements OnInit {
 
-  profileValidations: FormGroup;
+  date = new FormControl(new Date());
+  serializedDate = new FormControl((new Date()).toISOString());
 
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
+
 
   isAppMobile= false;
   saving = false;
@@ -38,12 +38,23 @@ export class EditProfileComponent extends AppComponentBase implements OnInit {
   roles: RoleDto[] = [];
   checkedRolesMap: { [key: string]: boolean } = {};
 
+  genders = ['Male', 'Female', 'Non Binary'];
+
   userPersonalData = {
     idNumber: null,
+    profilePicUrl: null,
     age: null,
     passPortNumber: null,
     gender: null,
-    mobileNumber: null
+    mobileNumber: null,
+    dob: {
+      dayOfBirth:null,
+      monthOfBirth: null,
+      yearOfBirth: null,
+      fullDate: null,
+
+    }
+
 
   }
 
@@ -90,6 +101,10 @@ export class EditProfileComponent extends AppComponentBase implements OnInit {
 
   save(): void {
 
+    // this.mapDataToDto();
+
+    console.log(this.user.passportNumber);
+
     this.saving = true;
     this._userService
       .update(this.user)
@@ -109,6 +124,78 @@ export class EditProfileComponent extends AppComponentBase implements OnInit {
   close(result: any): void {
     this._dialogRef.close(result);
   }
+
+  getMoreInfo() {
+
+
+
+    this.userPersonalData.dob.dayOfBirth = this.userPersonalData.idNumber.toString().substring(4,6);
+    this.userPersonalData.dob.monthOfBirth = this.userPersonalData.idNumber.toString().substring(2,4);
+    this.userPersonalData.dob.yearOfBirth = this.userPersonalData.idNumber.toString().substring(0,2);
+
+    this.userPersonalData.dob.fullDate = new Date(
+      this.userPersonalData.dob.yearOfBirth,
+      parseInt(this.userPersonalData.idNumber.toString().substring(2,4)) - 1,
+      this.userPersonalData.dob.dayOfBirth);
+
+      this.date = new FormControl(this.userPersonalData.dob.fullDate);
+
+      console.log(this.userPersonalData.dob.fullDate);
+
+    this.userPersonalData.gender = this.getGender(this.userPersonalData.idNumber.toString().substring(6,10))
+
+    console.log(this.user);
+
+  }
+
+  getGender(code){
+
+    let tempGender = '';
+
+    if(parseInt(code) <= 4999) {
+
+      tempGender = this.genders[1];
+
+    } else {
+
+      tempGender = this.genders[0];
+
+    }
+    return tempGender;
+
+  }
+
+  doNothing() {
+
+  }
+
+  mapDataToDto() {
+    this.user.idNumber = this.userPersonalData.idNumber;
+    this.user.profilePicUrl = this.userPersonalData.profilePicUrl;
+    this.user.age = this.userPersonalData.age;
+    this.user.passportNumber = this.userPersonalData.passPortNumber;
+
+    // this.user.gender = this.userPersonalData.gender;
+
+    // this.user.
+
+
+    // userPersonalData = {
+    //   idNumber: null,
+    //   profilePicUrl: null,
+    //   age: null,
+    //   passPortNumber: null,
+    //   gender: null,
+    //   mobileNumber: null,
+    //   dob: {
+    //     dayOfBirth:null,
+    //     monthOfBirth: null,
+    //     yearOfBirth: null,
+    //     fullDate: null,
+
+    //   }
+  }
+
 
 
 

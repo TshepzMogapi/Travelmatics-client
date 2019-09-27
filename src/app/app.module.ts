@@ -46,7 +46,23 @@ import { EditProfileComponent } from './profile/edit-profile/edit-profile.compon
 import { ConfirmationDialog } from './contact-list/contact/confirmation-dialog';
 import { LocalStorageService } from './local-storage.service';
 
-import { NgxMaskModule } from 'ngx-mask';
+import { ProfileImageComponent } from './profile/profile-image/profile-image.component';
+
+import { AngularFirestore } from '@angular/fire/firestore';
+
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+
+
+import { AngularFireStorageModule } from '@angular/fire/storage';
+
+
+
+const fBConfig = {
+
+}
+
+
 
 @NgModule({
   declarations: [
@@ -79,7 +95,8 @@ import { NgxMaskModule } from 'ngx-mask';
     CreateContactComponent,
     ProfileComponent,
     EditProfileComponent,
-    ConfirmationDialog
+    ConfirmationDialog,
+    ProfileImageComponent
   ],
   imports: [
     CommonModule,
@@ -88,14 +105,20 @@ import { NgxMaskModule } from 'ngx-mask';
     HttpClientModule,
     HttpClientJsonpModule,
     ModalModule.forRoot(),
-    NgxMaskModule.forRoot(),
     AbpModule,
     AppRoutingModule,
     ServiceProxyModule,
     SharedModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+
+
+    AngularFireModule.initializeApp(fBConfig),
+    AngularFireDatabaseModule,
+    AngularFireStorageModule // imports firebase/storage only needed for storage features
+
   ],
   providers: [
+    AngularFirestore,
     // ContactServiceProxy
     LocalStorageService
   ],
@@ -114,6 +137,8 @@ import { NgxMaskModule } from 'ngx-mask';
     EditProfileComponent,
 
     ConfirmationDialog,
+
+    ProfileImageComponent,
 
 
     // Contacts
