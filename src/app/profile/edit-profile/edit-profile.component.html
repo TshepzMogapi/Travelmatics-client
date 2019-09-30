@@ -151,14 +151,14 @@
             <mat-form-field>
               <input
               matInput
-              name="MobileNumber"
-              placeholder="Mobile Number"
-              [(ngModel)]="userPersonalData.mobileNumber"
+              name="PhoneNumber"
+              placeholder="Phone Number"
+              [(ngModel)]="user.phoneNumber"
               required
-              #MobileNumber="ngModel"
+              #PhoneNumber="ngModel"
               />
 
-              <mat-error *ngIf="MobileNumber.errors?.required">
+              <mat-error *ngIf="PhoneNumber.errors?.required">
                 A contact number is required.
               </mat-error>
 

@@ -60,7 +60,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 
 const fBConfig = {
 
-}
+};
 
 
 

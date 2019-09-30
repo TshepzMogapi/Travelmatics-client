@@ -14,6 +14,8 @@ import { UtilService } from "@app/util.service";
 })
 export class ProfileComponent implements OnInit {
 
+  genders = ['Male', 'Female', 'Non Binary'];
+
   user: UserDto = new UserDto();
   appSession: AppSessionService;
 

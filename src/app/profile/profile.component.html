@@ -33,41 +33,41 @@
 
                     <h4 style="margin:16px;">Personal Details</h4>
 
-                            <label style="margin:16px;">
+                            <label style="margin:16px;width:20%;">
                               Name
                               </label>
                               <span style="margin:16px;">{{user.name}}</span>
 
                               <br>
 
-                              <label style="margin:16px;">
+                              <label style="margin:16px;width:20%;">
                                   Surname
                                   </label>
                                   <span style="margin:16px;">{{user.surname}}</span>
                                   <br>
-                                  <label style="margin:16px;">
+                                  <label style="margin:16px;width:20%;">
                                       ID Number
                                       </label>
                                       <span style="margin:16px;"> {{user.idNumber}}</span>
 
                                   <br>
-                                  <label style="margin:16px;">
+                                  <label style="margin:16px;width:20%;">
                                       Gender
                                       </label>
-                                      <span style="margin:16px;">Male</span>
+                                      <span style="margin:16px;">{{genders[user.gender]}}</span>
 
 
                                       <br>
                                       <mat-divider></mat-divider>
 
                                       <h4>Contact Details</h4>
-                                      <label style="margin:16px;">
+                                      <label style="margin:16px;width:20%;">
                                           Mobile Number
                                           </label>
-                                          <span style="margin:16px;"> 07123456789</span>
+                                          <span style="margin:16px;"> {{user.phoneNumber}}</span>
                                       <br>
 
-                                      <label style="margin:16px;">
+                                      <label style="margin:16px;width:20%;">
                                           Email
                                           </label>
                                           <span style="margin:16px;">
@@ -76,7 +76,7 @@
 
                 <mat-tab label="More info">
 
-                    <label style="margin:16px;">
+                    <label style="margin:16px;width:20%;">
                         Theme
                         </label>
 

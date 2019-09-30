@@ -3434,6 +3434,8 @@ export class UserDto implements IUserDto {
     passportNumber: string | undefined;
     profilePicUrl: string | undefined;
     age: number | undefined;
+    phoneNumber: number | undefined;
+    gender: UserDtoGender | undefined;
     id: number | undefined;
 
     constructor(data?: IUserDto) {
@@ -3464,6 +3466,8 @@ export class UserDto implements IUserDto {
             this.passportNumber = data["passportNumber"];
             this.profilePicUrl = data["profilePicUrl"];
             this.age = data["age"];
+            this.phoneNumber = data["phoneNumber"];
+            this.gender = data["gender"];
             this.id = data["id"];
         }
     }
@@ -3494,6 +3498,8 @@ export class UserDto implements IUserDto {
         data["passportNumber"] = this.passportNumber;
         data["profilePicUrl"] = this.profilePicUrl;
         data["age"] = this.age;
+        data["phoneNumber"] = this.phoneNumber;
+        data["gender"] = this.gender;
         data["id"] = this.id;
         return data; 
     }
@@ -3520,6 +3526,8 @@ export interface IUserDto {
     passportNumber: string | undefined;
     profilePicUrl: string | undefined;
     age: number | undefined;
+    phoneNumber: number | undefined;
+    gender: UserDtoGender | undefined;
     id: number | undefined;
 }
 
@@ -3771,6 +3779,12 @@ export interface IPagedResultDtoOfUserDto {
 }
 
 export enum IsTenantAvailableOutputState {
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
+}
+
+export enum UserDtoGender {
     _1 = 1, 
     _2 = 2, 
     _3 = 3, 

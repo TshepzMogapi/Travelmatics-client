@@ -131,9 +131,6 @@ export class EditProfileComponent extends AppComponentBase implements OnInit {
 
   getMoreInfo() {
 
-    console.log(this.user);
-
-
 
     this.userPersonalData.dob.dayOfBirth = this.user.idNumber.toString().substring(4,6);
     this.userPersonalData.dob.monthOfBirth = this.user.idNumber.toString().substring(2,4);
@@ -149,7 +146,11 @@ export class EditProfileComponent extends AppComponentBase implements OnInit {
 
     this.userPersonalData.gender = this.getGender(this.user.idNumber.toString().substring(6,10))
 
-    // console.log(this.userPersonalData.gender);
+
+    this.user.gender = this.genders.indexOf(this.userPersonalData.gender);
+
+    console.log(this.user.gender);
+
 
   }
 
